@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Section from './components/Section';
 import AppBar from './components/AppBar';
 import HomePage from './components/HomePage';
@@ -22,6 +23,7 @@ export default function App() {
 
         <Route path="*" element={<HomePage />} />
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
     </Section>
   );
 }

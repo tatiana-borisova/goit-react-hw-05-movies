@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useParams } from 'react-router';
-import { fetchMovieById } from '../../apiService/fetchApi.js';
+import { fetchMovieById, onFetchError } from '../../apiService/fetchApi.js';
 import s from './MovieDetailsPage.module.css';
 
 export default function MovieDetailsPage() {
@@ -10,7 +10,9 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetchMovieById(movieId).then(movie => setMovie(movie));
+    fetchMovieById(movieId)
+      .then(movie => setMovie(movie))
+      .catch(onFetchError);
   }, [movieId]);
 
   return (

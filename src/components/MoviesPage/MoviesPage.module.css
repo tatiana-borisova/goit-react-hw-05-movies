@@ -13,7 +13,8 @@
   width: 47px;
   height: 47px;
   border-radius: 5px;
-  border: 1px black solid;
+  border: 1px #0f548d solid;
+  background-color: rgba(33, 150, 243, 0.5);
   background-size: 40%;
   background-repeat: no-repeat;
   background-position: center;
@@ -44,8 +45,8 @@
   font: inherit;
   font-size: 20px;
   border-radius: 5px;
-  border: 1px black solid;
-  padding: 11px 4px;
+  border: 1px #0f548d solid;
+  padding: 11px 7px;
 }
 
 .input::placeholder {

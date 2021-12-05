@@ -17,7 +17,7 @@ export default function Reviews() {
   return (
     <>
       {reviews && reviews.length > 0 && (
-        <ol className={s.list}>
+        <ul className={s.list}>
           {reviews.map(review => (
             <li key={review.id} className={s.item}>
               <div className={s.author}>
@@ -32,12 +32,12 @@ export default function Reviews() {
                     alt=""
                   />
                 </div>
-                <h4 className={s.name}>Author: {review.author}</h4>
+                <h4 className={s.name}>{review.author}</h4>
               </div>
               <p className={s.content}>{review.content}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       )}
       {reviews && reviews.length === 0 && (
         <p className={s.noMovie}>

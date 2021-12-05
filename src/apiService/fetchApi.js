@@ -1,4 +1,5 @@
-import { error } from '@pnotify/core/dist/PNotify.js';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const key = '0acbef793912116e8168b05c9b24e1e7';
 const baseURL = `https://api.themoviedb.org/3`;
@@ -51,7 +52,7 @@ export function fetchReviews(query) {
 }
 
 export function fetchMovieByKeyWord(query) {
-  return fetch(`${baseURL}/search/keyword?api_key=${key}&query=${query}`).then(
+  return fetch(`${baseURL}/search/movie?api_key=${key}&query=${query}`).then(
     response => {
       if (response.ok) {
         return response.json();
@@ -61,8 +62,8 @@ export function fetchMovieByKeyWord(query) {
   );
 }
 
+// https://api.themoviedb.org/3/search/movie?api_key=0acbef793912116e8168b05c9b24e1e7&language=en-US&query=venom&page=1&include_adult=false
+
 export function onFetchError() {
-  error({
-    text: 'No matches found, please try again',
-  });
+  toast.error('No matches found, please try again');
 }

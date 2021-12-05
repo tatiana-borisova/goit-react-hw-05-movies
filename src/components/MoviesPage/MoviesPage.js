@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { ImSearch } from 'react-icons/im';
 import { Link, Outlet } from 'react-router-dom';
-import { fetchMovieByKeyWord } from '../../apiService/fetchApi';
-import theFirstLetterToUpperCase from '../../helpers/theFirstLetterToUpperCase';
+import { fetchMovieByKeyWord, onFetchError } from '../../apiService/fetchApi';
 import s from './MoviesPage.module.css';
 
 export default function MoviesPage() {
@@ -12,16 +11,16 @@ export default function MoviesPage() {
   const handleQueryChange = e => {
     setSearchQuery(e.currentTarget.value.toLowerCase());
   };
+
   const handleQuerySubmit = e => {
     e.preventDefault();
-    console.log(searchQuery);
 
-    fetchMovieByKeyWord(searchQuery).then(movies => setMovies(movies.results));
+    fetchMovieByKeyWord(searchQuery)
+      .then(movies => setMovies(movies.results))
+      .catch(onFetchError);
 
     setSearchQuery('');
   };
-
-  console.log(movies);
 
   return (
     <>
@@ -44,9 +43,9 @@ export default function MoviesPage() {
       {movies && (
         <ul className={s.list}>
           {movies.map(movie => (
-            <li className={s.item}>
+            <li className={s.item} key={movie.id}>
               <Link className={s.link} to={`/movies/${movie.id}`}>
-                {theFirstLetterToUpperCase(movie.name)}
+                {movie.title}
               </Link>
             </li>
           ))}
