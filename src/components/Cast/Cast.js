@@ -1,19 +1,41 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
-import { fetchCredits } from '../../apiService/fetchApi';
+import { fetchCast, onFetchError } from '../../apiService/fetchApi';
+import s from './Cast.module.css';
 
 export default function Cast() {
-  console.log('HELLO');
-  const param = useParams();
-  console.log(param);
+  const { movieId } = useParams();
+  const [cast, setCast] = useState(null);
 
-  //   const [credits, setCredits] = useState(null);
+  useEffect(() => {
+    fetchCast(movieId)
+      .then(movie => setCast(movie.cast))
+      .catch(onFetchError);
+  }, [movieId]);
 
-  //   useEffect(() => {
-  //     fetchCredits(movieId).then(movie => setCredits(movie));
-  //   }, [movieId]);
-
-  //   console.log(credits);
-
-  return <div>HALLO!</div>;
+  return (
+    <>
+      {cast && (
+        <ul className={s.list}>
+          {cast.map(actor => (
+            <li key={actor.id} className={s.item}>
+              <div className={s.thumb}>
+                <img
+                  className={s.img}
+                  src={
+                    actor.profile_path
+                      ? `https://image.tmdb.org/t/p/w342/${actor.profile_path}`
+                      : 'https://i.work.ua/career_guide/59_b.png'
+                  }
+                  alt={actor.name}
+                />
+              </div>
+              <h3 className={s.name}>{actor.name}</h3>
+              <p className={s.character}>Character: {actor.character}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
 }

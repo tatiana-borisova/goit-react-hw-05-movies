@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { useParams } from 'react-router';
-import { fetchMovieByKeyWord } from '../../apiService/fetchApi.js';
+import { fetchMovieById } from '../../apiService/fetchApi.js';
 import s from './MovieDetailsPage.module.css';
 
 export default function MovieDetailsPage() {
@@ -10,13 +10,18 @@ export default function MovieDetailsPage() {
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    fetchMovieByKeyWord(movieId).then(movie => setMovie(movie));
+    fetchMovieById(movieId).then(movie => setMovie(movie));
   }, [movieId]);
 
   return (
     <>
       {movie && (
-        <div>
+        <div
+          className={s.background}
+          style={{
+            backgroundImage: `linear-gradient(to right,rgba(255, 255, 255, 0.9),rgba(255, 231, 231, 0.9)),url('https://image.tmdb.org/t/p/w342/${movie.backdrop_path}')`,
+          }}
+        >
           <div className={s.info}>
             <img
               src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
@@ -46,6 +51,7 @@ export default function MovieDetailsPage() {
               </li>
             </ul>
           </div>
+          <Outlet />
         </div>
       )}
     </>

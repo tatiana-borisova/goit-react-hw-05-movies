@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ImSearch } from 'react-icons/im';
+import { Outlet } from 'react-router-dom';
 import s from './MoviesPage.module.css';
 
 export default function MoviesPage() {
@@ -27,6 +28,7 @@ export default function MoviesPage() {
           value={searchQuery}
         />
       </form>
+      <Outlet />
     </>
   );
 }

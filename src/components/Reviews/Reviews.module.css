@@ -1,0 +1,25 @@
+.list {
+  padding: 15px;
+}
+.author {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+.thumb {
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.img {
+  object-fit: cover;
+  height: 100%;
+}
+.name {
+  margin: 0 5px 0;
+}
+.noMovie {
+  display: inline-block;
+  margin: 15px 0;
+}
