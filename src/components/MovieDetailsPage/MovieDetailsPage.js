@@ -24,7 +24,11 @@ export default function MovieDetailsPage() {
         >
           <div className={s.info}>
             <img
-              src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w342/${movie.poster_path}`
+                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpwWJq3_l53c_y23r8gbPaeETCmAmVo9F25A&usqp=CAU'
+              }
               alt={movie.title}
             />
             <div className={s.descr}>

@@ -50,6 +50,17 @@ export function fetchReviews(query) {
   );
 }
 
+export function fetchMovieByKeyWord(query) {
+  return fetch(`${baseURL}/search/keyword?api_key=${key}&query=${query}`).then(
+    response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error();
+    },
+  );
+}
+
 export function onFetchError() {
   error({
     text: 'No matches found, please try again',
