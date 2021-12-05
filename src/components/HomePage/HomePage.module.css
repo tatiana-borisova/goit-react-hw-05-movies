@@ -1,3 +1,6 @@
+.pageTitle {
+  text-align: center;
+}
 .list {
   display: flex;
   flex-wrap: wrap;
@@ -44,4 +47,15 @@
   text-decoration: none;
   display: inline-block;
   color: #0f548d;
+}
+.title {
+  margin: 0 0 5px 0;
+}
+.vote {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  margin-right: 5px;
+  color: #e48900;
 }
