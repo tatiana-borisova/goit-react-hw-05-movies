@@ -1,0 +1,29 @@
+.thumb {
+  background-color: rgb(165, 165, 165);
+  height: 398px;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.img {
+  object-fit: cover;
+  min-height: 100%;
+}
+
+.descr {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 5px;
+}
+.title {
+  margin: 0;
+}
+.vote {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  margin-right: 5px;
+  color: #e48900;
+}

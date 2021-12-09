@@ -1,12 +1,19 @@
 .background {
-  background-color: rgba(255, 255, 255, 0.5);
-  background-repeat: no-repeat;
-  background-size: cover;
+  margin: 0 auto 15px;
+  max-width: 80vw;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.9),
+    rgba(231, 231, 255, 0.9)
+  );
+  overflow: hidden;
   border-radius: 20px;
 }
 .info {
   display: flex;
   padding: 20px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .descr {
   margin-left: 20px;
@@ -15,14 +22,28 @@
   max-width: 500px;
 }
 .addInfo {
-  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 20px;
   border-top: 1px solid #2a363b;
   border-bottom: 1px solid #2a363b;
 }
+.title {
+  margin: 0 0 5px 0;
+}
+.list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
 .link {
   display: inline-block;
-  padding: 5px 0;
+  padding: 5px 5px;
   color: #0f548d;
+  font-size: large;
   transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .link:hover,

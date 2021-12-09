@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { useParams } from 'react-router';
+import { Link, Outlet } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router';
 import { fetchMovieById, onFetchError } from '../../apiService/fetchApi.js';
+import BackButton from '../BackButton';
 import s from './MovieDetailsPage.module.css';
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
-
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     fetchMovieById(movieId)
@@ -17,19 +18,21 @@ export default function MovieDetailsPage() {
 
   return (
     <>
+      <BackButton />
       {movie && (
-        <div
-          className={s.background}
-          style={{
-            backgroundImage: `linear-gradient(to right,rgba(255, 255, 255, 0.9),rgba(255, 231, 231, 0.9)),url('https://image.tmdb.org/t/p/w342/${movie.backdrop_path}')`,
-          }}
-        >
-          <div className={s.info}>
+        <div className={s.background}>
+          <div
+            className={s.info}
+            style={{
+              backgroundImage: `linear-gradient(to right,rgba(255, 255, 255, 0.9),rgba(231, 231, 255, 0.9)),url('https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}')`,
+            }}
+          >
             <img
+              className={s.img}
               src={
                 movie.poster_path
                   ? `https://image.tmdb.org/t/p/w342/${movie.poster_path}`
-                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpwWJq3_l53c_y23r8gbPaeETCmAmVo9F25A&usqp=CAU'
+                  : 'https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png'
               }
               alt={movie.title}
             />
@@ -43,17 +46,29 @@ export default function MovieDetailsPage() {
             </div>
           </div>
           <div className={s.addInfo}>
-            <p>Additional information</p>
-            <ul>
+            <h3 className={s.title}>Additional information</h3>
+            <ul className={s.list}>
               <li>
-                <NavLink className={s.link} to={`/movies/${movieId}/cast`}>
+                <Link
+                  className={s.link}
+                  to={`/movies/${movieId}/cast`}
+                  state={{
+                    from: location?.state?.from,
+                  }}
+                >
                   Cast
-                </NavLink>
+                </Link>
               </li>
               <li>
-                <NavLink className={s.link} to={`/movies/${movieId}/reviews`}>
+                <Link
+                  className={s.link}
+                  to={`/movies/${movieId}/reviews`}
+                  state={{
+                    from: location?.state?.from,
+                  }}
+                >
                   Reviews
-                </NavLink>
+                </Link>
               </li>
             </ul>
           </div>

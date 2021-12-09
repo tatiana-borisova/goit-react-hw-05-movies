@@ -3,6 +3,15 @@ import { useParams } from 'react-router';
 import { fetchReviews, onFetchError } from '../../apiService/fetchApi';
 import s from './Reviews.module.css';
 
+const getAvatarUrl = path => {
+  if (!path) {
+    return 'https://img2.freepng.ru/20180529/hao/kisspng-user-profile-computer-icons-login-user-avatars-5b0d943145b5c4.6135737115276165612855.jpg';
+  } else if (path.startsWith('/http')) {
+    return path.substr(1);
+  }
+  return `https://image.tmdb.org/t/p/w342/${path}`;
+};
+
 export default function Reviews() {
   const { movieId } = useParams();
 
@@ -24,11 +33,7 @@ export default function Reviews() {
                 <div className={s.thumb}>
                   <img
                     className={s.img}
-                    src={
-                      review.author_details.avatar_path
-                        ? `https://image.tmdb.org/t/p/w342/${review.author_details.avatar_path}`
-                        : 'https://img2.freepng.ru/20180529/hao/kisspng-user-profile-computer-icons-login-user-avatars-5b0d943145b5c4.6135737115276165612855.jpg'
-                    }
+                    src={getAvatarUrl(review.author_details.avatar_path)}
                     alt=""
                   />
                 </div>
