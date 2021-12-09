@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import {
   fetchTrendingMovies,
   onFetchError,
 } from '../../apiService/fetchApi.js';
-import Gallery from '../Gallery';
 import s from './HomePage.module.css';
+
+const Gallery = lazy(() => import('../Gallery'));
 
 export default function HomePage() {
   const [movies, setMovies] = useState(null);
@@ -18,7 +21,20 @@ export default function HomePage() {
   return (
     <>
       <h1 className={s.title}>Trending today</h1>
-      {movies && <Gallery movies={movies} />}
+      {movies && (
+        <Suspense
+          fallback={
+            <Loader
+              color="#0f548d"
+              height={150}
+              width={150}
+              style={{ textAlign: 'center' }}
+            />
+          }
+        >
+          <Gallery movies={movies} />
+        </Suspense>
+      )}
     </>
   );
 }
